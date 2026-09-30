@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def home():
-    return "Привіт, Flask!"
+def index():
+    return render_template("index.html", phrase=TARGET_PHRASE)
 
 
 @app.route("/api/hello/<name>")
