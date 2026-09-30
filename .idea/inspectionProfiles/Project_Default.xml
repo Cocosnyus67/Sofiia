@@ -1,0 +1,47 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="alembic" />
+          <option value="APScheduler" />
+          <option value="bcrypt" />
+          <option value="blinker" />
+          <option value="cachetools" />
+          <option value="certifi" />
+          <option value="charset-normalizer" />
+          <option value="click" />
+          <option value="colorama" />
+          <option value="Flask" />
+          <option value="Flask-APScheduler" />
+          <option value="flask-cors" />
+          <option value="Flask-JWT-Extended" />
+          <option value="Flask-Mail" />
+          <option value="Flask-Migrate" />
+          <option value="Flask-SQLAlchemy" />
+          <option value="greenlet" />
+          <option value="idna" />
+          <option value="itsdangerous" />
+          <option value="Jinja2" />
+          <option value="Mako" />
+          <option value="MarkupSafe" />
+          <option value="PyJWT" />
+          <option value="python-dateutil" />
+          <option value="python-dotenv" />
+          <option value="python-telegram-bot" />
+          <option value="pytz" />
+          <option value="requests" />
+          <option value="six" />
+          <option value="SQLAlchemy" />
+          <option value="tornado" />
+          <option value="typing_extensions" />
+          <option value="tzdata" />
+          <option value="tzlocal" />
+          <option value="urllib3" />
+          <option value="Werkzeug" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
