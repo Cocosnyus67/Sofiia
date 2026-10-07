@@ -11,22 +11,33 @@
         <div class="icon" aria-hidden="true">⌨</div>
         <p class="label">ПЕРЕВІРКА КЛАВІАТУРНОГО ПОЧЕРКУ</p>
         <h1>Введи свій код</h1>
-        <p class="description">Набери код у полі нижче, щоб продовжити</p>
+        <p class="description">Набери фразу в полі нижче та натисни «Зберегти»</p>
+
         <div class="phrase-box">
-        <span class="phrase-label">Фраза для набору:</span>
-        <code class="phrase">{{ phrase }}</code>
+            <span class="phrase-label">Фраза для набору:</span>
+            <code class="phrase">{{ phrase }}</code>
         </div>
 
-        <form>
-            <label for="code">імʼя</label>
-            <input id="user-id" name="name" type="text" placeholder="Іван Франко" autocomplete="off">
-           
-            <label for="code">Твій код</label>
-            <input id="type-field" name="code" type="password" placeholder="Наприклад, test123" autocomplete="off">
-            <button type="button">Перевірити код <span aria-hidden="true">→</span></button>
+        <form onsubmit="return false;">
+            <label for="user-id">Ідентифікатор учасника</label>
+            <input id="user-id" name="firstName" type="text"
+                   placeholder="Іван Франко" autocomplete="off">
+
+            <label for="type-field">Твій код</label>
+            <input id="type-field" name="code" type="text"
+                   placeholder="Набери фразу зверху" autocomplete="off"
+                   autocapitalize="off" spellcheck="false">
+
+            <button id="submit-btn" type="button" disabled>
+                Зберегти спробу <span aria-hidden="true">→</span>
+            </button>
         </form>
-        <p class="hint">Код поки що нікуди не надсилається</p>
+
+        <p id="status" class="status" role="status"></p>
+        <p class="hint">Збережено спроб: <span id="attempt-count">0</span></p>
     </main>
-    <script src="{{ url_for('static', filename='collector.js') }}" data-phrase="{{ phrase }}"></script>
+
+    <script src="{{ url_for('static', filename='collector.js') }}"
+            data-phrase="{{ phrase }}"></script>
 </body>
 </html>

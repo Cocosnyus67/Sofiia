@@ -8,11 +8,11 @@
   const counterEl = document.getElementById("attempt-count");
 
   let attemptCount = 0;
-  let startTime = null;     // performance.now() у момент першого keydown спроби
-  let events = [];          // [{key, type, t}]
+  let startTime = null;
+  let events = [];
   let backspaceCount = 0;
   let errorCount = 0;
-  let lastGoodPrefixLen = 0; // для підрахунку "помилок" — відхилень від очікуваного префікса
+  let lastGoodPrefixLen = 0;
 
   function genId() {
     return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
@@ -41,8 +41,6 @@
       backspaceCount += 1;
     }
 
-    // Записуємо лише друковані символи та backspace, ігноруємо Shift/Tab тощо,
-    // щоб не забруднювати дані службовими клавішами.
     if (e.key.length === 1 || e.key === "Backspace") {
       events.push({ key: e.key, type: "down", t });
     }
@@ -59,8 +57,6 @@
   typeField.addEventListener("input", () => {
     const value = typeField.value;
 
-    // Підрахунок "помилок": скільки разів довжина коректного префікса
-    // (порівняно з еталонною фразою) зменшувалася або переставала зростати монотонно.
     let goodPrefixLen = 0;
     while (goodPrefixLen < value.length && goodPrefixLen < phrase.length &&
            value[goodPrefixLen] === phrase[goodPrefixLen]) {
