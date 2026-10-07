@@ -12,13 +12,21 @@
         <p class="label">ПЕРЕВІРКА КЛАВІАТУРНОГО ПОЧЕРКУ</p>
         <h1>Введи свій код</h1>
         <p class="description">Набери код у полі нижче, щоб продовжити</p>
+        <div class="phrase-box">
+        <span class="phrase-label">Фраза для набору:</span>
+        <code class="phrase">{{ phrase }}</code>
+        </div>
 
         <form>
+            <label for="code">імʼя</label>
+            <input id="user-id" name="name" type="text" placeholder="Іван Франко" autocomplete="off">
+           
             <label for="code">Твій код</label>
-            <input id="code" name="code" type="password" placeholder="Наприклад, test123" autocomplete="off">
+            <input id="type-field" name="code" type="password" placeholder="Наприклад, test123" autocomplete="off">
             <button type="button">Перевірити код <span aria-hidden="true">→</span></button>
         </form>
         <p class="hint">Код поки що нікуди не надсилається</p>
     </main>
+    <script src="{{ url_for('static', filename='collector.js') }}" data-phrase="{{ phrase }}"></script>
 </body>
 </html>
