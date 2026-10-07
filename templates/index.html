@@ -1,13 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Введення коду</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
-    <h1>Helooo world</h1>
+    <main class="card">
+        <div class="icon" aria-hidden="true">⌨</div>
+        <p class="label">ПЕРЕВІРКА КЛАВІАТУРНОГО ПОЧЕРКУ</p>
+        <h1>Введи свій код</h1>
+        <p class="description">Набери код у полі нижче, щоб продовжити</p>
+
+        <form>
+            <label for="code">Твій код</label>
+            <input id="code" name="code" type="password" placeholder="Наприклад, test123" autocomplete="off">
+            <button type="button">Перевірити код <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="hint">Код поки що нікуди не надсилається</p>
+    </main>
 </body>
 </html>
