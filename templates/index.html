@@ -19,11 +19,14 @@
         </div>
 
         <form onsubmit="return false;">
-            <label for="user-id">Ідентифікатор учасника</label>
-            <input id="user-id" name="firstName" type="text"
-                   placeholder="Іван Франко" autocomplete="off">
+            <label for="user-id" style="margin-top: 10px">  Ідентифікатор учасника</label>
+            <input id="user-id" name="participant" type="text"
+                   placeholder="u01" autocomplete="off"
+                   pattern="[A-Za-z0-9_-]{1,32}">
 
-            <label for="type-field">Твій код</label>
+
+
+            <label for="type-field" style="margin-top: 10px">Твій код</label>
             <input id="type-field" name="code" type="text"
                    placeholder="Набери фразу зверху" autocomplete="off"
                    autocapitalize="off" spellcheck="false">
