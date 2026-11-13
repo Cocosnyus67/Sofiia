@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  font-family: Arial, sans-serif;
+  color: #20243a;
+  background:
+    radial-gradient(circle at 15% 20%, #dedbff 0, transparent 30%),
+    radial-gradient(circle at 85% 80%, #d9f3e9 0, transparent 28%),
+    #f5f6fc;
+}
+
+.card {
+  width: 100%;
+  max-width: 410px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 24px 70px rgba(46, 48, 95, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.icon {
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  color: white;
+  background: linear-gradient(135deg, #8175ef, #594cce);
+  box-shadow: 0 10px 22px rgba(101, 86, 220, 0.3);
+  font-size: 30px;
+}
+
+.label {
+  margin: 0 0 10px;
+  color: #7265da;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  color: #22263d;
+  font-size: 28px;
+  text-align: center;
+}
+
+.description {
+  margin: 12px 0 30px;
+  color: #858ba0;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin: 18px 0 8px;
+  color: #42475c;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid #e1e3ee;
+  border-radius: 12px;
+  outline: none;
+  background: #fbfbfe;
+  color: #292d43;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+input::placeholder {
+  color: #a7acbb;
+}
+
+input:focus {
+  border-color: #8276e8;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(130, 118, 232, 0.14);
+}
+
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #7164e4, #584bc9);
+  box-shadow: 0 9px 20px rgba(91, 77, 203, 0.24);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 13px 25px rgba(91, 77, 203, 0.3);
+}
+
+button span {
+  font-size: 19px;
+  font-weight: normal;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+}

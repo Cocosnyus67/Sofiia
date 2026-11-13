@@ -1,12 +1,12 @@
 Запуск з кореня проєкту:
 
-    python app.py
+    python3 app.py
 
-    python features.py
+    python3 features.py
 
     pip install nbconvert     # один раз
     jupyter nbconvert --to notebook --execute --inplace eda.ipynb   # перераховує весь ноутбук
 
-    python models.py
+    python3 models.py
 
 """

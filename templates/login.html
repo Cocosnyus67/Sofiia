@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вхід до системи</title>
+  <link rel="stylesheet" href="../static/login.css">
+</head>
+<body>
+  <main class="card">
+    <div class="icon">⌨</div>
+    <p class="label">КЛАВІАТУРНА АВТЕНТИФІКАЦІЯ</p>
+    <h1>Вхід до системи</h1>
+    <p class="description">Введи логін і пароль, щоб продовжити.</p>
+
+    <form>
+      <label for="username">Логін</label>
+      <input id="username" name="username" type="text"
+             placeholder="Введи свій логін" autocomplete="username" required>
+
+      <label for="password">Пароль</label>
+      <input id="password" name="password" type="password"
+             placeholder="Введи свій пароль" autocomplete="current-password" required>
+
+      <button type="submit">Продовжити <span>→</span></button>
+    </form>
+  </main>
+</body>
+</html>
