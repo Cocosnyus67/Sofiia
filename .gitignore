@@ -1,0 +1,5 @@
+# профілі користувачів і журнал входів (там ритм набору конкретних людей)
+data/users.json
+data/profiles/
+data/login_log.csv
+__pycache__/

@@ -123,6 +123,64 @@ button span {
   font-weight: normal;
 }
 
+/* повідомлення про статус і результат входу */
+.status {
+  min-height: 20px;
+  margin: 16px 0 0;
+  font-size: 13px;
+  text-align: center;
+  color: #858ba0;
+}
+
+.status.ok {
+  color: #1c8f62;
+}
+
+.status.error {
+  color: #c9384a;
+}
+
+.hint {
+  margin: 12px 0 0;
+  font-size: 13px;
+  text-align: center;
+  color: #858ba0;
+}
+
+.hint a {
+  color: #6356d6;
+}
+
+.result {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.result.ok {
+  background: #e3f6ec;
+  color: #14664a;
+}
+
+.result.bad {
+  background: #fde8eb;
+  color: #9a2434;
+}
+
+.result-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.result-reason,
+.result-score {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 @media (max-width: 480px) {
   .card {
     padding: 32px 24px;

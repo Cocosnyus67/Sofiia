@@ -1,11 +1,3 @@
-"""Перетворює data/attempts.csv (одна подія = один рядок) на data/features.csv
-(одна спроба = один рядок, стовпці = ознаки для моделей).
-
-Запуск з кореня проєкту:
-    python -m pip install -r requirements.txt
-    python features.py
-"""
-
 import os
 import sys
 

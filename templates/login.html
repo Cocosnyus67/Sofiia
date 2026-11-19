@@ -3,27 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Вхід до системи</title>
-  <link rel="stylesheet" href="../static/login.css">
+  <title>{% if mode == "register" %}Реєстрація{% else %}Вхід до системи{% endif %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
-<body>
+<body data-mode="{{ mode }}" data-needed="{{ needed }}">
   <main class="card">
     <div class="icon">⌨</div>
     <p class="label">КЛАВІАТУРНА АВТЕНТИФІКАЦІЯ</p>
-    <h1>Вхід до системи</h1>
-    <p class="description">Введи логін і пароль, щоб продовжити.</p>
 
-    <form>
+    {% if mode == "register" %}
+      <h1>Реєстрація</h1>
+      <p class="description">
+        Придумай логін і набери пароль <b>{{ phrase }}</b> {{ needed }} разів
+        у своєму звичному темпі. Так система запам'ятає твій ритм.
+      </p>
+    {% else %}
+      <h1>Вхід до системи</h1>
+      <p class="description">
+        Введи логін і пароль у звичному темпі.
+        У демо пароль для всіх: <b>{{ phrase }}</b>.
+      </p>
+    {% endif %}
+
+    <form id="form">
       <label for="username">Логін</label>
       <input id="username" name="username" type="text"
-             placeholder="Введи свій логін" autocomplete="username" required>
+             placeholder="Введи свій логін" autocomplete="username"
+             pattern="[A-Za-z0-9_-]{1,32}" required>
 
       <label for="password">Пароль</label>
       <input id="password" name="password" type="password"
-             placeholder="Введи свій пароль" autocomplete="current-password" required>
+             placeholder="Введи свій пароль" autocomplete="off"
+             autocapitalize="off" spellcheck="false" required>
 
-      <button type="submit">Продовжити <span>→</span></button>
+      <button id="submit-btn" type="submit">
+        {% if mode == "register" %}Зберегти спробу{% else %}Продовжити{% endif %} <span>→</span>
+      </button>
     </form>
+
+    <p id="status" class="status" role="status"></p>
+
+    {% if mode == "register" %}
+      <p class="hint">Збережено спроб: <b id="count">0</b> з {{ needed }}</p>
+      <p class="hint"><a href="{{ url_for('auth.login_page') }}">Уже зареєстрований? Увійти</a></p>
+    {% else %}
+      <div id="result" class="result" hidden>
+        <p id="result-title" class="result-title"></p>
+        <p id="result-reason" class="result-reason"></p>
+        <p id="result-score" class="result-score"></p>
+      </div>
+      <p class="hint"><a href="{{ url_for('auth.register_page') }}">Немає профілю? Зареєструватися</a></p>
+    {% endif %}
   </main>
+
+  <script src="{{ url_for('static', filename='login.js') }}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 задача,модель,accuracy,precision,recall,FAR,FRR,параметри
-хто це?,knn,0.567,0.555,0.528,,,{'kneighborsclassifier__n_neighbors': 1}
-хто це?,random_forest,0.712,0.696,0.654,,,"{'max_depth': 10, 'n_estimators': 200}"
-свій чи чужий?,one_class_svm,,,,0.004,0.848,усереднено за власниками
-свій чи чужий?,isolation_forest,,,,0.506,0.162,усереднено за власниками
+хто це?,knn,0.593,0.573,0.527,,,{'kneighborsclassifier__n_neighbors': 1}
+хто це?,random_forest,0.726,0.727,0.632,,,"{'max_depth': None, 'n_estimators': 200}"
+свій чи чужий?,one_class_svm,,,,0.026,0.706,усереднено за власниками
+свій чи чужий?,isolation_forest,,,,0.407,0.126,усереднено за власниками

@@ -4,9 +4,12 @@ import re
 import threading
 from datetime import datetime
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, redirect, render_template, request, url_for
+
+from auth import auth   # сторінки /login і /register
 
 app = Flask(__name__)
+app.register_blueprint(auth)
 
 TARGET_PHRASE = "SS123+"
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -82,6 +85,13 @@ def validate(data):
 
 @app.route("/")
 def index():
+    # головна сторінка одразу веде на реєстрацію
+    return redirect(url_for("auth.register_page"))
+
+
+@app.route("/collector")
+def collector():
+    # сторінка збору даних (раніше була на "/")
     return render_template("index.html", phrase=TARGET_PHRASE)
 
 
