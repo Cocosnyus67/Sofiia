@@ -18,7 +18,7 @@ auth = Blueprint("auth", __name__)
 
 PHRASE = "SS123+"                                         # пароль у демо = тренувальна фраза
 ENROLL_ATTEMPTS = int(os.getenv("ENROLL_ATTEMPTS", "15"))  # скільки спроб треба для реєстрації
-PERCENTILE = 70                                           # як будуємо поріг (пояснення нижче)
+PERCENTILE = 77                                           # як будуємо поріг (пояснення нижче)
 MAX_EVENTS = 200
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
