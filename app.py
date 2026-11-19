@@ -6,7 +6,7 @@ from datetime import datetime
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 
-from auth import auth   # сторінки /login і /register
+from auth import auth   # сторінки login і register
 
 app = Flask(__name__)
 app.register_blueprint(auth)
@@ -85,13 +85,11 @@ def validate(data):
 
 @app.route("/")
 def index():
-    # головна сторінка одразу веде на реєстрацію
     return redirect(url_for("auth.register_page"))
 
 
 @app.route("/collector")
 def collector():
-    # сторінка збору даних (раніше була на "/")
     return render_template("index.html", phrase=TARGET_PHRASE)
 
 

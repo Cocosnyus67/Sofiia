@@ -1,20 +1,15 @@
-// Ця програма працює на двох сторінках: /login і /register.
-// Вона записує час натискання й відпускання клавіш у полі "Пароль"
-// і відправляє їх на сервер разом з логіном і паролем.
-
 (() => {
-  const mode = document.body.dataset.mode;          // "login" або "register"
+  const mode = document.body.dataset.mode;
 
   const form = document.getElementById("form");
   const userInput = document.getElementById("username");
   const passInput = document.getElementById("password");
   const statusEl = document.getElementById("status");
 
-  let startTime = null;       // час першого натискання
-  let events = [];            // усі натискання і відпускання
-  let pressed = new Set();    // які клавіші зараз затиснуті
+  let startTime = null;
+  let events = [];
+  let pressed = new Set();
 
-  // Які клавіші записуємо: літери, цифри, знаки, Shift і Backspace
   function isTracked(e) {
     return e.key.length === 1 || e.key === "Backspace" || e.key === "Shift";
   }
@@ -31,8 +26,8 @@
   }
 
   passInput.addEventListener("keydown", (e) => {
-    if (e.repeat) return;                                     // автоповтор ігноруємо
-    if (e.ctrlKey || e.altKey || e.metaKey) return;           // комбінації теж
+    if (e.repeat) return;
+    if (e.ctrlKey || e.altKey || e.metaKey) return;
     if (!isTracked(e)) return;
 
     if (startTime === null) startTime = performance.now();
@@ -46,7 +41,6 @@
     events.push({ key: e.key, code: e.code, type: "up", t: performance.now() - startTime });
   });
 
-  // Якщо поле очистили, починаємо спробу з нуля
   passInput.addEventListener("input", () => {
     if (passInput.value === "") {
       resetAttempt();
@@ -54,7 +48,6 @@
     }
   });
 
-  // Вставляти пароль не можна: тоді ритму не буде
   ["paste", "drop", "cut", "copy", "contextmenu"].forEach((name) => {
     passInput.addEventListener(name, (e) => {
       e.preventDefault();
@@ -136,7 +129,6 @@
       setStatus("Помилка з'єднання із сервером.", "error");
     }
 
-    // Після кожної спроби поле пароля очищаємо
     passInput.value = "";
     resetAttempt();
     passInput.focus();

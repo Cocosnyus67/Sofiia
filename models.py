@@ -24,24 +24,17 @@ DATA_PATH = os.path.join(BASE_DIR, "data", "features_clean.csv")
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 REPORTS_DIR = os.path.join(BASE_DIR, "reports")
 
-# Ці стовпці не є ознаками набору, їх у модель не передаємо
 SERVICE_COLUMNS = ["user", "session_id", "attempt_id", "backspace_count", "error_count"]
-
 
 def load_data():
     if not os.path.exists(DATA_PATH):
         sys.exit(f"Не знайдено {DATA_PATH}. Спочатку запустіть features.py і eda.ipynb.")
     df = pd.read_csv(DATA_PATH)
 
-    # dd_i = ud_i + dwell, тому ці ознаки дублюються: dd_* прибираємо
     df = df.drop(columns=[c for c in df.columns if c.startswith("dd_")])
     feature_cols = [c for c in df.columns if c not in SERVICE_COLUMNS]
     return df, feature_cols
 
-
-# ---------------------------------------------------------------------------
-# Задача 1. "Хто це?"  (KNN і Random Forest)
-# ---------------------------------------------------------------------------
 def identification(df, feature_cols):
     counts = df["user"].value_counts()
     keep = counts[counts >= MIN_ATTEMPTS].index
@@ -109,9 +102,6 @@ def save_confusion_matrix(y_true, y_pred, name):
     plt.close()
 
 
-# ---------------------------------------------------------------------------
-# Задача 2. "Свій чи чужий?"  (One-Class SVM і Isolation Forest)
-# ---------------------------------------------------------------------------
 def make_one_class(kind):
     if kind == "one_class_svm":
         return make_pipeline(StandardScaler(), OneClassSVM(nu=0.1, gamma="scale"))
@@ -119,7 +109,6 @@ def make_one_class(kind):
 
 
 def verify_owner(df, feature_cols, owner, kind):
-    """Навчаємо модель лише на спробах власника, потім рахуємо FAR і FRR."""
     own = df[df["user"] == owner]
     others = df[df["user"] != owner]
 

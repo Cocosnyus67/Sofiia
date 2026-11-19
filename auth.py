@@ -12,13 +12,13 @@ from flask import Blueprint, jsonify, render_template, request
 from sklearn.preprocessing import StandardScaler
 from werkzeug.security import check_password_hash, generate_password_hash
 
-import features  # беремо звідси готову функцію, яка рахує ознаки спроби
+import features
 
 auth = Blueprint("auth", __name__)
 
-PHRASE = "SS123+"                                         # пароль у демо = тренувальна фраза
-ENROLL_ATTEMPTS = int(os.getenv("ENROLL_ATTEMPTS", "15"))  # скільки спроб треба для реєстрації
-PERCENTILE = 77                                           # як будуємо поріг (пояснення нижче)
+PHRASE = "SS123+"
+ENROLL_ATTEMPTS = int(os.getenv("ENROLL_ATTEMPTS", "15"))  # кількість спроб
+PERCENTILE = 77                                           # яка точність вимагається
 MAX_EVENTS = 200
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,13 +27,9 @@ USERS_PATH = os.path.join(DATA_DIR, "users.json")
 PROFILES_DIR = os.path.join(DATA_DIR, "profiles")
 LOG_PATH = os.path.join(DATA_DIR, "login_log.csv")
 
-# Ці поля не є ознаками ритму, у модель їх не віддаємо
 SERVICE_FIELDS = ["user_id", "session_id", "attempt_id", "backspace_count", "error_count"]
 
 _lock = threading.Lock()
-
-
-# ---------- допоміжні функції ----------
 
 def read_users():
     if not os.path.exists(USERS_PATH):
@@ -49,7 +45,6 @@ def save_users(users):
 
 
 def check_events(events):
-    """Повертає текст помилки або None, якщо все гаразд."""
     if not isinstance(events, list) or not events:
         return "Немає подій набору"
     if len(events) > MAX_EVENTS:
@@ -67,7 +62,6 @@ def check_events(events):
 
 
 def get_features(events):
-    """Перетворює події на словник ознак (як у features.py). None, якщо спроба невдала."""
     rows = []
     for i, ev in enumerate(events):
         rows.append({
@@ -79,7 +73,6 @@ def get_features(events):
 
 
 def feature_columns(row):
-    # як у models.py: службові поля й dd_* (вони дублюють ud_*) не беремо
     return [k for k in row if k not in SERVICE_FIELDS and not k.startswith("dd_")]
 
 
@@ -88,13 +81,6 @@ def profile_path(username):
 
 
 def train_profile(username, samples, cols):
-    """Профіль = усі спроби власника + поріг відстані.
-
-    Ідея проста: нова спроба "своя", якщо вона схожа хоча б на одну зі спроб власника.
-    Схожість = відстань між наборами ознак (чим менша, тим схожіші).
-    Поріг: дивимось, на якій відстані власні спроби стоять одна від одної,
-    і беремо 85-й перцентиль (так ~85% своїх спроб проходять).
-    """
     scaler = StandardScaler().fit(pd.DataFrame(samples, columns=cols))
     T = scaler.transform(pd.DataFrame(samples, columns=cols))
 
@@ -123,9 +109,6 @@ def write_log(username, access, distance, reason):
 def valid_username(name):
     return isinstance(name, str) and re.fullmatch(r"[A-Za-z0-9_-]{1,32}", name) is not None
 
-
-# ---------- сторінки ----------
-
 @auth.route("/login")
 def login_page():
     return render_template("login.html", mode="login", phrase=PHRASE, needed=ENROLL_ATTEMPTS)
@@ -135,8 +118,6 @@ def login_page():
 def register_page():
     return render_template("login.html", mode="register", phrase=PHRASE, needed=ENROLL_ATTEMPTS)
 
-
-# ---------- реєстрація: одна спроба = один запит ----------
 
 @auth.route("/api/register", methods=["POST"])
 def api_register():
@@ -197,8 +178,6 @@ def api_register():
     return jsonify(ok=True, count=count, needed=ENROLL_ATTEMPTS, ready=ready)
 
 
-# ---------- вхід ----------
-
 @auth.route("/api/login", methods=["POST"])
 def api_login():
     data = request.get_json(silent=True)
@@ -219,7 +198,6 @@ def api_login():
     users = read_users()
     user = users.get(username)
 
-    # 1) спочатку пароль (про те, що логіна нема, не кажемо окремо)
     if user is None or not check_password_hash(user["password_hash"], password):
         write_log(username, False, "", "невірний логін або пароль")
         return jsonify(ok=True, access=False, reason="Невірний логін або пароль")
