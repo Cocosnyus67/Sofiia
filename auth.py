@@ -18,7 +18,7 @@ auth = Blueprint("auth", __name__)
 
 PHRASE = "SS123+"
 ENROLL_ATTEMPTS = int(os.getenv("ENROLL_ATTEMPTS", "15"))  # кількість спроб
-PERCENTILE = 60                                           # яка точність вимагається
+PERCENTILE = 85                                           # яка точність вимагається
 MAX_EVENTS = 200
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
